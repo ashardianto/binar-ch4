@@ -61,14 +61,17 @@ function game(userChoice) {
 function gameFunction() {
 rock.addEventListener('click', function() {
     game("rock");
+    rock.style.background = "white"
 })
 
 paper.addEventListener('click', function() {
     game("paper");
+    paper.style.background = "white"
 })
 
 scissor.addEventListener('click', function() {
     game("scissor");
+    scissor.style.background = "white"
 })
 }
 
@@ -76,6 +79,9 @@ refresh.addEventListener('click', function() {
     computerPaper.style.background = "none"
     computerRock.style.background = "none"
     computerScissor.style.background = "none"
+    paper.style.background = "none"
+    rock.style.background = "none"
+    scissor.style.background = "none"
     result.innerHTML = "VS"
     playAgain.innerHTML = ""
 })
