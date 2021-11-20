@@ -1,89 +1,67 @@
-const rock = document.getElementById("rock")
-const paper = document.getElementById("paper")
-const scissor = document.getElementById("scissor")
-const result = document.querySelector(".info-typo")
-const refresh = document.getElementById("refresh")
-const playAgain = document.querySelector(".again-typo")
-const computerRock = document.getElementById("computer-rock")
-const computerPaper = document.getElementById("computer-paper")
-const computerScissor = document.getElementById("computer-scissor")
+const rock = document.getElementById("rock");
+const paper = document.getElementById("paper");
+const scissor = document.getElementById("scissor");
+let result = document.querySelector(".info-typo");
+const refresh = document.getElementById("refresh");
+const playerChoice = document.querySelectorAll(".player-pick img");
+const computerChoice = document.querySelectorAll(".computer-pick img");
+
+function gameFunction() {
+    rock.addEventListener('click', function(e) {
+        game("rock", e.currentTarget);
+    });    
+    paper.addEventListener('click', function(e) {
+        game("paper", e.currentTarget);
+    });    
+    scissor.addEventListener('click', function(e) {
+        game("scissor", e.currentTarget);
+    });   
+}
+
+function game(userChoice, target) {
+    const computerChoice = playerComputerChoice();
+    const playerElements = [].slice.call(document.querySelectorAll('.choice'));
+
+    playerElements.forEach(e => (e.removeAttribute('style')));
+    target.style.background = "white";
+
+    switch (userChoice + computerChoice) {
+        case "rockscissor":
+        case "paperrock":
+        case "scissorpaper":
+            result.innerHTML = "You Win!";
+            break;
+        case "scissorrock":
+        case "rockpaper":
+        case "paperscissor":
+            result.innerHTML = "You Lose!";
+            break;
+        case "scissorscissor":
+        case "paperpaper":
+        case "rockrock":
+            result.innerHTML = "Draw!";
+    }
+}
 
 function playerComputerChoice() {
     const choices = ['rock', 'paper', 'scissor']
-    const randomChoice = Math.floor(Math.random() * 3);
-    return choices[randomChoice]
-}
+    const randomChoice = Math.floor(Math.random() * choices.length);
 
-function game(userChoice) {
-    const computerChoice = playerComputerChoice();
-    if (computerChoice === "paper") {
-        computerPaper.style.background = "#fff";
-        if (userChoice === "scissor") {
-            result.innerHTML = "YOU WIN"
-        } else if (userChoice === "rock") {
-            result.innerHTML = "YOU LOSE"
-        } else {
-            result.innerHTML = "DRAW"
-        }
-    } else if (computerChoice === "rock") {
-        computerRock.style.background = "#fff"
-        if (userChoice === "scissor") {
-            result.innerHTML = "YOU LOSE"
-        } else if (userChoice === "paper") {
-            result.innerHTML = "YOU WIN"
-        } else {
-            result.innerHTML = "DRAW"
-        }
-    } else if (computerChoice === "scissor") {
-        computerScissor.style.background = "#fff"
-        if (userChoice === "rock") {
-            result.innerHTML = "YOU WIN"
-        } else if (userChoice === "paper") {
-            result.innerHTML = "YOU LOSE"
-        } else {
-            result.innerHTML = "DRAW"
-        }
-    }
-    playAgain.innerHTML = "Press to Play Again"
-}
+    const computerElement  = document.getElementById('computer-' + choices[randomChoice]);
+    const computerElements = [].slice.call(document.querySelectorAll('.choice-computer'));
 
-// function computerHand() {
-//     const computerChoice = playerComputerChoice();
-//     if (computerChoice === "paper") {
-//         computerPaper.style.background = "#fff";
-//     } else if (computerChoice === "rock") {
-//         computerRock.style.background = "#fff"
-//     } else if (computerChoice === "scissor") {
-//         computerScissor.style.background = "#fff"
-//     }
-// }
+    computerElements.forEach(e => (e.removeAttribute('style')));
+    computerElement.style.backgroundColor = 'white';
 
-function gameFunction() {
-rock.addEventListener('click', function() {
-    game("rock");
-    rock.style.background = "white"
-})
-
-paper.addEventListener('click', function() {
-    game("paper");
-    paper.style.background = "white"
-})
-
-scissor.addEventListener('click', function() {
-    game("scissor");
-    scissor.style.background = "white"
-})
+    return choices[randomChoice];
 }
 
 refresh.addEventListener('click', function() {
-    computerPaper.style.background = "none"
-    computerRock.style.background = "none"
-    computerScissor.style.background = "none"
-    paper.style.background = "none"
-    rock.style.background = "none"
-    scissor.style.background = "none"
+    const playerElements = [].slice.call(document.querySelectorAll('.choice'));
+    playerElements.forEach(e => (e.removeAttribute('style')));
+
+    const computerElements = [].slice.call(document.querySelectorAll('.choice-computer'));
+    computerElements.forEach(e => (e.removeAttribute('style')));
     result.innerHTML = "VS"
-    playAgain.innerHTML = ""
 })
 gameFunction();
-// computerHand();
