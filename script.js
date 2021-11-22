@@ -1,6 +1,10 @@
 const rock = document.getElementById("rock");
 const paper = document.getElementById("paper");
 const scissor = document.getElementById("scissor");
+const playerScoreCount = document.getElementById("player-score")
+const compScoreCount = document.getElementById("computer-score")
+let playerScore = 0;
+let computerScore = 0;
 let result = document.querySelector(".info-typo");
 const refresh = document.getElementById("refresh");
 const playerChoice = document.querySelectorAll(".player-pick img");
@@ -8,8 +12,10 @@ const computerChoice = document.querySelectorAll(".computer-pick img");
 
 function getPlayerName() {
     let playerName = document.querySelector(".player-name")
+    let playerScoreBoard = document.querySelector('.player-point')
     let person = prompt("Please enter your name:", "") || "PLAYER";
     playerName.innerHTML = person.toUpperCase();
+    playerScoreBoard.innerHTML = person.toUpperCase();
 }
 
 function gameFunction() {
@@ -24,6 +30,24 @@ function gameFunction() {
     });   
 }
 
+function win() {
+    playerScore++;
+    playerScoreCount.innerHTML = playerScore;
+    compScoreCount.innerHTML = computerScore;
+    result.innerHTML = "You Win!";
+}
+function lose() {
+    computerScore++;
+    playerScoreCount.innerHTML = playerScore;
+    compScoreCount.innerHTML = computerScore;
+    result.innerHTML = "You Lose!";
+}
+function draw() {
+    playerScoreCount.innerHTML = playerScore;
+    compScoreCount.innerHTML = computerScore;
+    result.innerHTML = "Draw!";
+}
+
 function game(userChoice, target) {
     const computerChoice = playerComputerChoice();
     const playerElements = [].slice.call(document.querySelectorAll('.choice'));
@@ -35,17 +59,17 @@ function game(userChoice, target) {
         case "rockscissor":
         case "paperrock":
         case "scissorpaper":
-            result.innerHTML = "You Win!";
+            win();
             break;
         case "scissorrock":
         case "rockpaper":
         case "paperscissor":
-            result.innerHTML = "You Lose!";
+            lose();
             break;
         case "scissorscissor":
         case "paperpaper":
         case "rockrock":
-            result.innerHTML = "Draw!";
+            draw();
     }
 }
 
@@ -69,6 +93,12 @@ refresh.addEventListener('click', function() {
     const computerElements = [].slice.call(document.querySelectorAll('.choice-computer'));
     computerElements.forEach(e => (e.removeAttribute('style')));
     result.innerHTML = "VS"
+    playerScore = 0;
+    computerScore = 0;
+    playerScoreCount.innerHTML = playerScore;
+    compScoreCount.innerHTML = computerScore;
+    
 })
+
 getPlayerName();
 gameFunction();

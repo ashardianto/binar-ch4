@@ -24,6 +24,35 @@ body {
     top: 10%;
 }
 
+.game-score {
+    position: relative;
+    top: 15%;
+}
+
+.score-container {
+    width: fit-content;    
+    margin: 0 auto;
+    align-items: center;   
+    display: flex;
+    border: 2px #000 solid;
+    padding: 10px;
+}
+
+h2 {
+    margin-bottom: 0 !important;
+}
+
+span {
+    font-size: 2em;
+}
+
+#player-profile,
+#computer-profile {
+    display: flex;
+    margin: 0 20px;
+    align-items: center;
+}
+
 .container {
     position: relative;
     display: flex;
@@ -57,7 +86,7 @@ body {
     color: red;
     font-size: 3.5em;
     margin-top: 1em;
-    margin-right: 0.5em;
+    /* margin-right: 0.5em; */
 }
 
 .d-block {
