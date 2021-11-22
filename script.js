@@ -6,6 +6,12 @@ const refresh = document.getElementById("refresh");
 const playerChoice = document.querySelectorAll(".player-pick img");
 const computerChoice = document.querySelectorAll(".computer-pick img");
 
+function getPlayerName() {
+    let playerName = document.querySelector(".player-name")
+    let person = prompt("Please enter your name:", "") || "PLAYER";
+    playerName.innerHTML = person.toUpperCase();
+}
+
 function gameFunction() {
     rock.addEventListener('click', function(e) {
         game("rock", e.currentTarget);
@@ -64,4 +70,5 @@ refresh.addEventListener('click', function() {
     computerElements.forEach(e => (e.removeAttribute('style')));
     result.innerHTML = "VS"
 })
+getPlayerName();
 gameFunction();
