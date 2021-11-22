@@ -1,3 +1,5 @@
+// GET ELEMENT
+
 const rock = document.getElementById("rock");
 const paper = document.getElementById("paper");
 const scissor = document.getElementById("scissor");
@@ -9,6 +11,8 @@ let result = document.querySelector(".info-typo");
 const refresh = document.getElementById("refresh");
 const playerChoice = document.querySelectorAll(".player-pick img");
 const computerChoice = document.querySelectorAll(".computer-pick img");
+
+// FUNCTION
 
 function getPlayerName() {
     let playerName = document.querySelector(".player-name")
